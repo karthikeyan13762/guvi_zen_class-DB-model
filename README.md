@@ -1,0 +1,158 @@
+MYSQL-DB Model For Guvi Zen Class
+
+
+create database guvi_zen_class;
+
+show databases;
+
+use guvi_zen_class;
+
+
+-- students table --
+
+create table students (
+    student_id int primary key auto_increment,
+    student_name varchar(50) not null,
+    student_email varchar(255) unique,
+    student_mobile varchar(15) not null,
+    batch varchar(10) not null
+);
+
+show tables;
+
+desc students;
+
+-- classes table --
+
+create table classes (
+    session_id int primary key auto_increment,
+    session_name varchar(25) unique,
+    session_datetime datetime not null,
+    mentor varchar(50) not null,
+    student_id int,
+    attendance varchar(10) not null,
+    batch varchar(10) not null,
+    foreign key (student_id) references students(student_id)
+);
+
+show tables;
+
+desc classes;
+
+-- tasks table --
+
+create table tasks (
+    task_id int primary key auto_increment,
+    task_title varchar(100) not null,
+    submitted_datetime datetime not null,
+    student_id int not null,
+	task_score int check (task_score >= 0 and task_score <= 10),
+    batch varchar(10) not null,
+    foreign key (student_id) references students(student_id)
+);
+
+show tables;
+
+desc tasks;
+
+-- capstones table --
+
+create table capstones (
+    capstone_id int primary key auto_increment,
+    capstone_project varchar(100) not null,
+    submitted_datetime datetime not null,
+    student_id int not null,
+	capstone_score int check (capstone_score >= 0 and capstone_score <= 10),
+    batch varchar(10) not null,
+    foreign key (student_id) references students(student_id)
+);
+
+
+show tables;
+
+desc capstones;
+
+-- my queries table --
+
+create table my_queries (
+    query_id int primary key auto_increment,
+    created_datetime datetime not null,
+    closed_datetime datetime not null,
+    student_id int not null,
+    assigned_to varchar(50) not null,
+    description varchar(275) not null,
+    foreign key (student_id) references students(student_id)
+);
+
+show tables;
+
+desc my_queries;
+
+-- portfolios table --
+create table portfolios (
+    portfolio_id int primary key auto_increment,
+    student_id int not null,
+    github_url varchar(255) not null,
+    portfolio_url varchar(255) not null,
+    resume_url varchar(255) not null,
+    review_status varchar(55) not null,
+    batch varchar(10) not null,
+    review_comment varchar(255) not null,
+    reviewed_by varchar(50) not null,
+    foreign key (student_id) references students(student_id)
+);
+
+show tables;
+
+desc portfolios;
+
+-- mock interviews table --
+
+create table mock_interviews (
+    mock_interview_id int primary key auto_increment,
+    interview_round varchar(100) not null,
+    interview_date date not null,
+    overall_score decimal(5,2) not null,
+    recording_url varchar(255) not null,
+    comment varchar(255) not null,
+    action varchar(255) not null,
+    student_id int not null,
+    foreign key (student_id) references students(student_id)
+);
+
+show tables;
+
+desc mock_interviews;
+
+-- leaderboards table --
+
+create table leaderboards (
+    leaderboard_id int primary key auto_increment,
+	student_rank int not null,
+    student_id int not null,
+    batch varchar(10) not null,
+    learning float not null,
+    foreign key (student_id) references students(student_id)
+);
+
+show tables;
+
+desc students;
+
+desc classes;
+
+desc tasks;
+
+desc capstones;
+
+desc my_queries;
+
+desc portfolios;
+
+desc mock_interviews;
+
+desc leaderboards;
+show databases;
+use guvi_zen_class;
+
+show tables;
