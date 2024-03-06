@@ -1,6 +1,6 @@
 
-
-# MYSQL-DB Model For Guvi Zen Class
+# Model
+MYSQL-DB Model For Guvi Zen Class
 
 
 create database guvi_zen_class;
